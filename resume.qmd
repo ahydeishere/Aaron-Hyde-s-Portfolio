@@ -21,8 +21,10 @@ Student at Brigham Young University - Idaho studying to major in economics with 
 
 January 2024 - July 2027
 Brigham Young University - Idaho
+Bachelor of Science in Economics | Data Science Minor
+GPA: 3.77
 
-## Skills Aquired:
+### Skills Aquired:
  - R Studio
  - Python
  - Microsoft PowerBI
@@ -30,21 +32,25 @@ Brigham Young University - Idaho
  - Microsoft Excel
 
 
+### Important Classes
+ - Intermediate Microeconomics
+ - Intermediate Macroeconomics
+ - Data Wrangling/Visualizations
+ 
+
+## Occupations
+
+`2024-present`
+__Testing Center Proctor__ BYU-Idaho Testing Center at Rexburg, ID
+
+•	Analyze and record data on 100-150 exams which were taken throughout the day. 
+•	Assessed situations of cheating and acknowledge it to students in a calm and direct manner. 
+•	Exemplified customer service with stressful students taking exams.
 
 
-## Occupation
-
-`1600`
-__Royal Mint__, London
-
-- Warden
-- Minted coins
-
-`1600`
-__Lucasian professor of Mathematics__, Cambridge University
 
 
 
 <!-- ### Footer
 
-Last updated: May 2013 -->
+Last updated: March 2026 -->
