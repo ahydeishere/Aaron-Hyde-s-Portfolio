@@ -73,10 +73,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b719d3d4935f2b08311a76135e2bf442.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b719d3d4935f2b08311a76135e2bf442.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-c8b544e1eab81f7563542c0a8b71d1e9.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-b719d3d4935f2b08311a76135e2bf442.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8683a3bba88b21f5dec9796f70e7e65b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-eead07a6271f81aaf401c8f80545cdc1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f9a105091df3ab81157587366a814a1e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-eead07a6271f81aaf401c8f80545cdc1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,7 +113,167 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="docked nav-fixed quarto-light">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    window.setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      window.setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    window.hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(darkModeDefault) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const darkModeDefault = false;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !window.hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+    };
+    // Switch to dark mode if need be
+    if (window.hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -161,6 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -168,9 +333,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#cleaning-the-data-set" id="toc-cleaning-the-data-set" class="nav-link active" data-scroll-target="#cleaning-the-data-set">Cleaning the data set</a>
@@ -192,6 +358,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#nfc-teams-wins" id="toc-nfc-teams-wins" class="nav-link" data-scroll-target="#nfc-teams-wins">NFC Teams Wins</a></li>
   <li><a href="#afc-teams-wins" id="toc-afc-teams-wins" class="nav-link" data-scroll-target="#afc-teams-wins">AFC Teams Wins</a></li>
   </ul></li>
+  <li><a href="#win-loss-percentages" id="toc-win-loss-percentages" class="nav-link" data-scroll-target="#win-loss-percentages">Win Loss Percentages</a>
+  <ul class="collapse">
+  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis:</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#statistical-visuals" id="toc-statistical-visuals" class="nav-link" data-scroll-target="#statistical-visuals">Statistical Visuals</a>
   <ul class="collapse">
@@ -201,22 +371,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#penalties-to-losses" id="toc-penalties-to-losses" class="nav-link" data-scroll-target="#penalties-to-losses">Penalties to losses</a>
   <ul class="collapse">
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis:</a></li>
+  <li><a href="#analysis-1" id="toc-analysis-1" class="nav-link" data-scroll-target="#analysis-1">Analysis:</a></li>
   </ul></li>
   </ul></li>
   </ul>
 </nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">DS 350 Final Poject</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<h1 class="title">DS 350 Final Poject</h1>
 <p class="subtitle lead">A visual/analysis on NFL data</p>
 </div>
 
@@ -241,22 +408,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readr, readxl, downloader, rio, plotly, knitr, pander, ggthemes, ggrepel, directlabels, gapminder, dplyr, nycflights13, Lahman, priceR, riem, USAboundaries, USAboundariesData, sf, stringr, stringi, reticulate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>nfl_data_set <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:/Users/aaron/OneDrive/Desktop/nfl_data/team_stats_2003_2023.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="cleaning-the-data-set" class="level1">
 <h1>Cleaning the data set</h1>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nfl_data_cleaned <span class="ot">&lt;-</span> nfl_data_set <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>mov, <span class="sc">-</span>g, <span class="sc">-</span>exp_pts_tot) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">team =</span> <span class="fu">str_replace_all</span>(team, <span class="st">"Oakland Raiders"</span>, <span class="st">"Las Vegas Raiders"</span>),</span>
@@ -279,7 +438,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  ))</span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(nfl_data_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 672
 Columns: 33
@@ -317,11 +475,8 @@ $ turnover_pct         &lt;dbl&gt; 11.3, 17.2, 17.6, 11.8, 16.6, 11.1, 13.5, 17.
 $ ties                 &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
 $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East", "…</code></pre>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(nfl_data_set$team)</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(nfl_data_cleaned$team)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="data-wrangling-issuessolutions" class="level2">
 <h2 class="anchored" data-anchor-id="data-wrangling-issuessolutions">Data Wrangling Issues/Solutions</h2>
@@ -336,8 +491,6 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <section id="yards-per-season" class="level2">
 <h2 class="anchored" data-anchor-id="yards-per-season">Yards per Season</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>yards_per_season <span class="ot">&lt;-</span> <span class="cf">function</span>(season){</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  season_yards <span class="ot">&lt;-</span> nfl_data_cleaned <span class="sc">%&gt;%</span></span>
@@ -356,16 +509,12 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Team"</span></span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="examples" class="level3">
 <h3 class="anchored" data-anchor-id="examples">Examples</h3>
 <p>In these visuals, you can see that there are different visuals for the total yards that each team was able to get over the different seasons. This is filtered out by the seasons, so you input what year you want to see and it will sort it from the team with the most years to the team with the least amount of yards.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">yards_per_season</span>(<span class="dv">2005</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -373,10 +522,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">yards_per_season</span>(<span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -390,8 +536,6 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <section id="point-differential-visual" class="level2">
 <h2 class="anchored" data-anchor-id="point-differential-visual">Point Differential Visual</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>point_differential_visualization <span class="ot">&lt;-</span> <span class="cf">function</span>(team_name) {</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  team_data <span class="ot">&lt;-</span> nfl_data_cleaned <span class="sc">%&gt;%</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(team <span class="sc">==</span> {{team_name}}) <span class="sc">%&gt;%</span></span>
@@ -417,16 +561,12 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>      )</span>
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="examples-1" class="level3">
 <h3 class="anchored" data-anchor-id="examples-1">Examples</h3>
 <p>These are following examples of how the point differential is visualized. This shows how each team has done verses all of there other teams. The point differential is shown to visualize if they scored more points overall in a season or less points overall in a season</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">point_differential_visualization</span>(<span class="st">"New York Giants"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -434,10 +574,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">point_differential_visualization</span>(<span class="st">"Los Angeles Rams"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -445,10 +582,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">point_differential_visualization</span>(<span class="st">"New England Patriots"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -462,8 +596,6 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <section id="wins-by-divisions" class="level2">
 <h2 class="anchored" data-anchor-id="wins-by-divisions">Wins by Divisions</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>specific_division <span class="ot">&lt;-</span> <span class="cf">function</span>(division_name) {</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  team_specific <span class="ot">&lt;-</span> nfl_data_cleaned <span class="sc">%&gt;%</span></span>
@@ -526,16 +658,12 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(division_graph)</span>
 <span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
 <section id="nfc-teams-wins" class="level3">
 <h3 class="anchored" data-anchor-id="nfc-teams-wins">NFC Teams Wins</h3>
 <p>These charts show each teams win total in a season against everyone else in their specific division. This can help show if there is a division winner in the season. This section is for NFC teams</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"NFC South"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -543,10 +671,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"NFC North"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -554,10 +679,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"NFC West"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -565,10 +687,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"NFC East"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -582,10 +701,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <h3 class="anchored" data-anchor-id="afc-teams-wins">AFC Teams Wins</h3>
 <p>These charts show each teams win total in a season against everyone else in their specific division. This can help show if there is a division winner in the season. This section is for AFC teams</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"AFC South"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -593,10 +709,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"AFC North"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -604,10 +717,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"AFC West"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -615,10 +725,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"AFC East"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -629,6 +736,37 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </div>
 </section>
 </section>
+<section id="win-loss-percentages" class="level2">
+<h2 class="anchored" data-anchor-id="win-loss-percentages">Win Loss Percentages</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>divisions <span class="ot">&lt;-</span> nfl_data_cleaned <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(team) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_win_loss =</span> <span class="fu">mean</span>(win_loss_perc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_win_loss))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(divisions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 32 × 2
+   team                 avg_win_loss
+   &lt;chr&gt;                       &lt;dbl&gt;
+ 1 New England Patriots        0.714
+ 2 Pittsburgh Steelers         0.632
+ 3 Green Bay Packers           0.614
+ 4 Indianapolis Colts          0.605
+ 5 Baltimore Ravens            0.599
+ 6 Seattle Seahawks            0.584
+ 7 Kansas City Chiefs          0.577
+ 8 Philadelphia Eagles         0.575
+ 9 Dallas Cowboys              0.574
+10 New Orleans Saints          0.573
+# ℹ 22 more rows</code></pre>
+</div>
+</div>
+<section id="analysis" class="level3">
+<h3 class="anchored" data-anchor-id="analysis">Analysis:</h3>
+<p>This is to see how on average these teams have been over the last 2 decades. As we can see, some teams performed better overall than other teams.</p>
+</section>
+</section>
 </section>
 <section id="statistical-visuals" class="level1">
 <h1>Statistical Visuals</h1>
@@ -636,85 +774,73 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <section id="wins-with-yardstotal-rushing-and-passing" class="level2">
 <h2 class="anchored" data-anchor-id="wins-with-yardstotal-rushing-and-passing">Wins with Yards(Total, rushing, and passing)</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> total_yards, <span class="at">color =</span> year)) <span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Total Yards"</span>,</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Yards in a Season"</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> rush_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Rushing Yards"</span>,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many rushing yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> pass_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> total_yards, <span class="at">color =</span> year)) <span class="sc">+</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Passing Yards"</span>,</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many passing yards a team should get in order to get the desired win total"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Total Yards"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Yards in a Season"</span></span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(<span class="fu">factor</span>(wins), total_yards, <span class="at">.fun =</span> quantile, .<span class="dv">75</span>), <span class="at">y =</span> total_yards, <span class="at">fill =</span> wins)) <span class="sc">+</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span> </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span><span class="st">"none"</span> </span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total Yards by Wins"</span>,</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> rush_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Rushing Yards"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many rushing yards a team should get in order to get the desired win total"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> pass_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Passing Yards"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many passing yards a team should get in order to get the desired win total"</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Yards in a Season"</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(<span class="fu">factor</span>(wins), total_yards, <span class="at">.fun =</span> quantile, .<span class="dv">75</span>), <span class="at">y =</span> total_yards, <span class="at">fill =</span> wins)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span><span class="st">"none"</span> </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total Yards by Wins"</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-12-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -727,27 +853,22 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <section id="penalties-to-losses" class="level2">
 <h2 class="anchored" data-anchor-id="penalties-to-losses">Penalties to losses</h2>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> losses, <span class="at">y =</span>penalties)) <span class="sc">+</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> losses, <span class="at">y =</span>penalties)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="final_ds350_project_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="analysis" class="level3">
-<h3 class="anchored" data-anchor-id="analysis">Analysis:</h3>
+<section id="analysis-1" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-1">Analysis:</h3>
 <p>This graph was to see what the correlation between losses and penalties. As we can see, there is a small, yet very weak correlation. When I first did this, I thought that if a team was penalized more, they would have more losses. However, it does not show that truly.</p>
 
-
-<!-- -->
 
 </section>
 </section>
@@ -756,6 +877,19 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    window.setColorSchemeToggle(window.hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -823,57 +957,6 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -1203,302 +1286,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
       }
     }
   });
-  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb27" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "DS 350 Final Poject"</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A visual/analysis on NFL data"</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Aaron Hyde"</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>, <span class="at">error =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, readr, readxl, downloader, rio, plotly, knitr, pander, ggthemes, ggrepel, directlabels, gapminder, dplyr, nycflights13, Lahman, priceR, riem, USAboundaries, USAboundariesData, sf, stringr, stringi, reticulate)</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>nfl_data_set <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:/Users/aaron/OneDrive/Desktop/nfl_data/team_stats_2003_2023.csv"</span>)</span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="fu"># Cleaning the data set</span></span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>nfl_data_cleaned <span class="ot">&lt;-</span> nfl_data_set <span class="sc">%&gt;%</span></span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>mov, <span class="sc">-</span>g, <span class="sc">-</span>exp_pts_tot) <span class="sc">%&gt;%</span></span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">team =</span> <span class="fu">str_replace_all</span>(team, <span class="st">"Oakland Raiders"</span>, <span class="st">"Las Vegas Raiders"</span>),</span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>         <span class="at">team =</span> <span class="fu">str_replace_all</span>(team, <span class="st">"Washington Redskins"</span>, <span class="st">"Washington Commanders"</span>),</span>
-<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>         <span class="at">team =</span> <span class="fu">str_replace_all</span>(team, <span class="st">"Washington Football Team"</span>, <span class="st">"Washington Commanders"</span>),</span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>         <span class="at">team =</span> <span class="fu">str_replace_all</span>(team, <span class="st">"San Diego Chargers"</span>, <span class="st">"Los Angeles Chargers"</span>),</span>
-<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>         <span class="at">team =</span> <span class="fu">str_replace_all</span>(team, <span class="st">"St. Louis Rams"</span>, <span class="st">"Los Angeles Rams"</span>),</span>
-<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>         <span class="at">ties =</span> <span class="fu">as.numeric</span>(ties),</span>
-<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>         <span class="at">ties =</span> <span class="fu">replace_na</span>(ties, <span class="dv">0</span>),</span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>         <span class="at">division =</span> <span class="fu">case_when</span>(</span>
-<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>    team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Buffalo Bills"</span>, <span class="st">"Miami Dolphins"</span>, <span class="st">"New England Patriots"</span>, <span class="st">"New York Jets"</span>) <span class="sc">~</span> <span class="st">"AFC East"</span>,</span>
-<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>    team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Baltimore Ravens"</span>, <span class="st">"Cincinnati Bengals"</span>, <span class="st">"Cleveland Browns"</span>, <span class="st">"Pittsburgh Steelers"</span>) <span class="sc">~</span> <span class="st">"AFC North"</span>,</span>
-<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>    team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Houston Texans"</span>, <span class="st">"Indianapolis Colts"</span>, <span class="st">"Jacksonville Jaguars"</span>, <span class="st">"Tennessee Titans"</span>) <span class="sc">~</span> <span class="st">"AFC South"</span>,</span>
-<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>    team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Denver Broncos"</span>, <span class="st">"Kansas City Chiefs"</span>, <span class="st">"Las Vegas Raiders"</span>, <span class="st">"Los Angeles Chargers"</span>) <span class="sc">~</span> <span class="st">"AFC West"</span>,</span>
-<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>    team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dallas Cowboys"</span>, <span class="st">"New York Giants"</span>, <span class="st">"Philadelphia Eagles"</span>, <span class="st">"Washington Commanders"</span>) <span class="sc">~</span> <span class="st">"NFC East"</span>,</span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>    team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Chicago Bears"</span>, <span class="st">"Detroit Lions"</span>, <span class="st">"Green Bay Packers"</span>, <span class="st">"Minnesota Vikings"</span>) <span class="sc">~</span> <span class="st">"NFC North"</span>,</span>
-<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>    team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Atlanta Falcons"</span>, <span class="st">"Carolina Panthers"</span>, <span class="st">"New Orleans Saints"</span>, <span class="st">"Tampa Bay Buccaneers"</span>) <span class="sc">~</span> <span class="st">"NFC South"</span>,</span>
-<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>    team <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Arizona Cardinals"</span>, <span class="st">"Los Angeles Rams"</span>, <span class="st">"San Francisco 49ers"</span>, <span class="st">"Seattle Seahawks"</span>) <span class="sc">~</span> <span class="st">"NFC West"</span>,</span>
-<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
-<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(nfl_data_cleaned)</span>
-<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(nfl_data_set$team)</span></span>
-<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a><span class="co">#unique(nfl_data_cleaned$team)</span></span>
-<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Wrangling Issues/Solutions</span></span>
-<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a>The main problems with the wrangling this data set is making it so that all the teams that were the same would still be classified. For example, There were a lot of teams that have moved to different locations over the last 2 decades, as well as a re branding of a team. The main teams that faced that issue were the Rams, Raiders, Chargers, and the Commanders. Because this data set has the name of the city or state first, some teams were called by the city then the mascot. So in order to change that, I set them to where their present day team are. The next hiccup was with the Washington Commanders. All the way until 2020, the commanders were known as the redskins. They changed their name to the Washington Football Team for a season or two, but then eventually landed on the Commanders as their team name. So in order to see how they did as a who over the last couple decades, I changed the name so that way it would be their present day names.</span>
-<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a>Another thing that I noticed with this data set is that there were a lot of different stats that were in this data set, but they were not important to me, so I filtered them out so that way they would not produce a problem for me in the long run. Some of these included mov (margin of victory), g(games played), and exp_pts_tot columns. These columns did not seem necessary to me while making these visuals, so I filtered them out here.</span>
-<span id="cb27-61"><a href="#cb27-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-62"><a href="#cb27-62" aria-hidden="true" tabindex="-1"></a>The other issue was that there were a lot of NA in the ties column. These NA were blank in the spreed sheet because there was no ties during that season. Other season had some ties. So I replaced all of the NA in the Ties column with 0 because there was a value. </span>
-<span id="cb27-63"><a href="#cb27-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-64"><a href="#cb27-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-65"><a href="#cb27-65" aria-hidden="true" tabindex="-1"></a><span class="fu"># Visuals/Funcitons for Specific Teams/Divisions/seasons</span></span>
-<span id="cb27-66"><a href="#cb27-66" aria-hidden="true" tabindex="-1"></a>During this part, I made multiple different visualizations to highlight specific data, such as wins in a specific season, point differential changes for a team, or how division teams win totals are different. Before each visual, there is a subtitle to highlight what each code is producing. Some may not have functions or filters, but I am hoping that the visuals still help.</span>
-<span id="cb27-67"><a href="#cb27-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-68"><a href="#cb27-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## Yards per Season</span></span>
-<span id="cb27-71"><a href="#cb27-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-72"><a href="#cb27-72" aria-hidden="true" tabindex="-1"></a>yards_per_season <span class="ot">&lt;-</span> <span class="cf">function</span>(season){</span>
-<span id="cb27-73"><a href="#cb27-73" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-74"><a href="#cb27-74" aria-hidden="true" tabindex="-1"></a>  season_yards <span class="ot">&lt;-</span> nfl_data_cleaned <span class="sc">%&gt;%</span></span>
-<span id="cb27-75"><a href="#cb27-75" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">==</span> season) </span>
-<span id="cb27-76"><a href="#cb27-76" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-77"><a href="#cb27-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(season_yards, <span class="fu">aes</span>(<span class="at">x =</span> total_yards, <span class="at">y =</span> <span class="fu">reorder</span>(team, total_yards), <span class="at">fill =</span> division)) <span class="sc">+</span></span>
-<span id="cb27-78"><a href="#cb27-78" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb27-79"><a href="#cb27-79" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb27-80"><a href="#cb27-80" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span></span>
-<span id="cb27-81"><a href="#cb27-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb27-82"><a href="#cb27-82" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
-<span id="cb27-83"><a href="#cb27-83" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
-<span id="cb27-84"><a href="#cb27-84" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb27-85"><a href="#cb27-85" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="fu">paste0</span>(season, <span class="st">" Season"</span>), </span>
-<span id="cb27-86"><a href="#cb27-86" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Total Yards"</span>,</span>
-<span id="cb27-87"><a href="#cb27-87" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Team"</span></span>
-<span id="cb27-88"><a href="#cb27-88" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb27-89"><a href="#cb27-89" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-90"><a href="#cb27-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-91"><a href="#cb27-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-92"><a href="#cb27-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-93"><a href="#cb27-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### Examples</span></span>
-<span id="cb27-94"><a href="#cb27-94" aria-hidden="true" tabindex="-1"></a>In these visuals, you can see that there are different visuals for the total yards that each team was able to get over the different seasons. This is filtered out by the seasons, so you input what year you want to see and it will sort it from the team with the most years to the team with the least amount of yards.</span>
-<span id="cb27-97"><a href="#cb27-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-98"><a href="#cb27-98" aria-hidden="true" tabindex="-1"></a><span class="fu">yards_per_season</span>(<span class="dv">2005</span>)</span>
-<span id="cb27-99"><a href="#cb27-99" aria-hidden="true" tabindex="-1"></a><span class="fu">yards_per_season</span>(<span class="dv">2020</span>)</span>
-<span id="cb27-100"><a href="#cb27-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-101"><a href="#cb27-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-102"><a href="#cb27-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-103"><a href="#cb27-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-104"><a href="#cb27-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-105"><a href="#cb27-105" aria-hidden="true" tabindex="-1"></a><span class="fu">## Point Differential Visual</span></span>
-<span id="cb27-108"><a href="#cb27-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-109"><a href="#cb27-109" aria-hidden="true" tabindex="-1"></a>point_differential_visualization <span class="ot">&lt;-</span> <span class="cf">function</span>(team_name) {</span>
-<span id="cb27-110"><a href="#cb27-110" aria-hidden="true" tabindex="-1"></a>  team_data <span class="ot">&lt;-</span> nfl_data_cleaned <span class="sc">%&gt;%</span></span>
-<span id="cb27-111"><a href="#cb27-111" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(team <span class="sc">==</span> {{team_name}}) <span class="sc">%&gt;%</span></span>
-<span id="cb27-112"><a href="#cb27-112" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">result =</span> <span class="fu">if_else</span>(points_diff <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Positive"</span>, <span class="st">"Negative"</span>))</span>
-<span id="cb27-113"><a href="#cb27-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-114"><a href="#cb27-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(team_data, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> points_diff, <span class="at">fill =</span> result)) <span class="sc">+</span></span>
-<span id="cb27-115"><a href="#cb27-115" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb27-116"><a href="#cb27-116" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(</span>
-<span id="cb27-117"><a href="#cb27-117" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">label =</span> points_diff,</span>
-<span id="cb27-118"><a href="#cb27-118" aria-hidden="true" tabindex="-1"></a>          <span class="at">vjust =</span> <span class="fu">if_else</span>(points_diff <span class="sc">&gt;=</span> <span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>)),</span>
-<span id="cb27-119"><a href="#cb27-119" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="dv">3</span></span>
-<span id="cb27-120"><a href="#cb27-120" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb27-121"><a href="#cb27-121" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Positive"</span> <span class="ot">=</span> <span class="st">"green4"</span>, <span class="st">"Negative"</span> <span class="ot">=</span> <span class="st">"red3"</span>)) <span class="sc">+</span></span>
-<span id="cb27-122"><a href="#cb27-122" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
-<span id="cb27-123"><a href="#cb27-123" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb27-124"><a href="#cb27-124" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb27-125"><a href="#cb27-125" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb27-126"><a href="#cb27-126" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb27-127"><a href="#cb27-127" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> team_name,</span>
-<span id="cb27-128"><a href="#cb27-128" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"This is the point differential from 2003 to 2023"</span>,</span>
-<span id="cb27-129"><a href="#cb27-129" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Years"</span>,</span>
-<span id="cb27-130"><a href="#cb27-130" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Point Differential"</span></span>
-<span id="cb27-131"><a href="#cb27-131" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb27-132"><a href="#cb27-132" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-133"><a href="#cb27-133" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-134"><a href="#cb27-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-135"><a href="#cb27-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-136"><a href="#cb27-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-137"><a href="#cb27-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### Examples</span></span>
-<span id="cb27-138"><a href="#cb27-138" aria-hidden="true" tabindex="-1"></a>These are following examples of how the point differential is visualized. This shows how each team has done verses all of there other teams. The point differential is shown to visualize if they scored more points overall in a season or less points overall in a season</span>
-<span id="cb27-141"><a href="#cb27-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-142"><a href="#cb27-142" aria-hidden="true" tabindex="-1"></a><span class="fu">point_differential_visualization</span>(<span class="st">"New York Giants"</span>)</span>
-<span id="cb27-143"><a href="#cb27-143" aria-hidden="true" tabindex="-1"></a><span class="fu">point_differential_visualization</span>(<span class="st">"Los Angeles Rams"</span>)</span>
-<span id="cb27-144"><a href="#cb27-144" aria-hidden="true" tabindex="-1"></a><span class="fu">point_differential_visualization</span>(<span class="st">"New England Patriots"</span>)</span>
-<span id="cb27-145"><a href="#cb27-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-146"><a href="#cb27-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-147"><a href="#cb27-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-148"><a href="#cb27-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-149"><a href="#cb27-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Wins by Divisions</span></span>
-<span id="cb27-150"><a href="#cb27-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-153"><a href="#cb27-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-154"><a href="#cb27-154" aria-hidden="true" tabindex="-1"></a>specific_division <span class="ot">&lt;-</span> <span class="cf">function</span>(division_name) {</span>
-<span id="cb27-155"><a href="#cb27-155" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-156"><a href="#cb27-156" aria-hidden="true" tabindex="-1"></a>  team_specific <span class="ot">&lt;-</span> nfl_data_cleaned <span class="sc">%&gt;%</span></span>
-<span id="cb27-157"><a href="#cb27-157" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(division <span class="sc">==</span> division_name)       </span>
-<span id="cb27-158"><a href="#cb27-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-159"><a href="#cb27-159" aria-hidden="true" tabindex="-1"></a>  team_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb27-160"><a href="#cb27-160" aria-hidden="true" tabindex="-1"></a>  <span class="co"># NFC North</span></span>
-<span id="cb27-161"><a href="#cb27-161" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Chicago Bears"</span>            <span class="ot">=</span> <span class="st">"#0B162A"</span>, <span class="st">"Detroit Lions"</span>            <span class="ot">=</span> <span class="st">"#0076B6"</span>, <span class="st">"Green Bay Packers"</span>        <span class="ot">=</span> <span class="st">"#203731"</span>, <span class="st">"Minnesota Vikings"</span>        <span class="ot">=</span> <span class="st">"#4F2683"</span>,</span>
-<span id="cb27-162"><a href="#cb27-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-163"><a href="#cb27-163" aria-hidden="true" tabindex="-1"></a>  <span class="co"># NFC South</span></span>
-<span id="cb27-164"><a href="#cb27-164" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Atlanta Falcons"</span>          <span class="ot">=</span> <span class="st">"#A71930"</span>, <span class="st">"Carolina Panthers"</span>        <span class="ot">=</span> <span class="st">"#0085CA"</span>, <span class="st">"New Orleans Saints"</span>       <span class="ot">=</span> <span class="st">"#D3BC8D"</span>, <span class="st">"Tampa Bay Buccaneers"</span>     <span class="ot">=</span> <span class="st">"#D50A0A"</span>,</span>
-<span id="cb27-165"><a href="#cb27-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-166"><a href="#cb27-166" aria-hidden="true" tabindex="-1"></a>  <span class="co"># NFC East</span></span>
-<span id="cb27-167"><a href="#cb27-167" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Dallas Cowboys"</span>           <span class="ot">=</span> <span class="st">"#003594"</span>, <span class="st">"New York Giants"</span>          <span class="ot">=</span> <span class="st">"#0B2265"</span>, <span class="st">"Philadelphia Eagles"</span>      <span class="ot">=</span> <span class="st">"#004C54"</span>, <span class="st">"Washington Commanders"</span>    <span class="ot">=</span> <span class="st">"#5A1414"</span>,</span>
-<span id="cb27-168"><a href="#cb27-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-169"><a href="#cb27-169" aria-hidden="true" tabindex="-1"></a>  <span class="co"># NFC West</span></span>
-<span id="cb27-170"><a href="#cb27-170" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Arizona Cardinals"</span>        <span class="ot">=</span> <span class="st">"#97233F"</span>, <span class="st">"Los Angeles Rams"</span>         <span class="ot">=</span> <span class="st">"#003594"</span>, <span class="st">"San Francisco 49ers"</span>      <span class="ot">=</span> <span class="st">"#AA0000"</span>, <span class="st">"Seattle Seahawks"</span>         <span class="ot">=</span> <span class="st">"#002244"</span>,</span>
-<span id="cb27-171"><a href="#cb27-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-172"><a href="#cb27-172" aria-hidden="true" tabindex="-1"></a>  <span class="co"># AFC North</span></span>
-<span id="cb27-173"><a href="#cb27-173" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Baltimore Ravens"</span>         <span class="ot">=</span> <span class="st">"#241773"</span>, <span class="st">"Cincinnati Bengals"</span>       <span class="ot">=</span> <span class="st">"#FB4F14"</span>, <span class="st">"Cleveland Browns"</span>         <span class="ot">=</span> <span class="st">"#311D00"</span>, <span class="st">"Pittsburgh Steelers"</span>      <span class="ot">=</span> <span class="st">"#FFB612"</span>,</span>
-<span id="cb27-174"><a href="#cb27-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-175"><a href="#cb27-175" aria-hidden="true" tabindex="-1"></a>  <span class="co"># AFC South</span></span>
-<span id="cb27-176"><a href="#cb27-176" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Houston Texans"</span>           <span class="ot">=</span> <span class="st">"#03202F"</span>, <span class="st">"Indianapolis Colts"</span>       <span class="ot">=</span> <span class="st">"#002C5F"</span>, <span class="st">"Jacksonville Jaguars"</span>     <span class="ot">=</span> <span class="st">"#006778"</span>, <span class="st">"Tennessee Titans"</span>         <span class="ot">=</span> <span class="st">"#0C2340"</span>,</span>
-<span id="cb27-177"><a href="#cb27-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-178"><a href="#cb27-178" aria-hidden="true" tabindex="-1"></a>  <span class="co"># AFC East</span></span>
-<span id="cb27-179"><a href="#cb27-179" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Buffalo Bills"</span>            <span class="ot">=</span> <span class="st">"#00338D"</span>, <span class="st">"Miami Dolphins"</span>           <span class="ot">=</span> <span class="st">"#008E97"</span>, <span class="st">"New England Patriots"</span>     <span class="ot">=</span> <span class="st">"#002244"</span>, <span class="st">"New York Jets"</span>            <span class="ot">=</span> <span class="st">"#125740"</span>,</span>
-<span id="cb27-180"><a href="#cb27-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-181"><a href="#cb27-181" aria-hidden="true" tabindex="-1"></a>  <span class="co"># AFC West</span></span>
-<span id="cb27-182"><a href="#cb27-182" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Denver Broncos"</span>           <span class="ot">=</span> <span class="st">"#FB4F14"</span>, <span class="st">"Kansas City Chiefs"</span>       <span class="ot">=</span> <span class="st">"#E31837"</span>, <span class="st">"Las Vegas Raiders"</span>        <span class="ot">=</span> <span class="st">"#000000"</span>, <span class="st">"Los Angeles Chargers"</span>     <span class="ot">=</span> <span class="st">"#0080C6"</span></span>
-<span id="cb27-183"><a href="#cb27-183" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-184"><a href="#cb27-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-185"><a href="#cb27-185" aria-hidden="true" tabindex="-1"></a>  division_graph <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(team_specific, <span class="fu">aes</span>(<span class="at">y =</span> wins, <span class="at">x =</span> year, <span class="at">color =</span> team)) <span class="sc">+</span>  </span>
-<span id="cb27-186"><a href="#cb27-186" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb27-187"><a href="#cb27-187" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">2027</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">2005</span>, <span class="dv">2010</span>,<span class="dv">2015</span>,<span class="dv">2020</span>)) <span class="sc">+</span></span>
-<span id="cb27-188"><a href="#cb27-188" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">16</span>))<span class="sc">+</span></span>
-<span id="cb27-189"><a href="#cb27-189" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> team_colors) <span class="sc">+</span></span>
-<span id="cb27-190"><a href="#cb27-190" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb27-191"><a href="#cb27-191" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb27-192"><a href="#cb27-192" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb27-193"><a href="#cb27-193" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>, <span class="dv">90</span>, <span class="dv">5</span>, <span class="dv">5</span>),</span>
-<span id="cb27-194"><a href="#cb27-194" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.line.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>),</span>
-<span id="cb27-195"><a href="#cb27-195" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.line.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>), </span>
-<span id="cb27-196"><a href="#cb27-196" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray80"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>),</span>
-<span id="cb27-197"><a href="#cb27-197" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray80"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>),</span>
-<span id="cb27-198"><a href="#cb27-198" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.grid.minor.y =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray90"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>)</span>
-<span id="cb27-199"><a href="#cb27-199" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb27-200"><a href="#cb27-200" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text_repel</span>(</span>
-<span id="cb27-201"><a href="#cb27-201" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> team_specific <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)), </span>
-<span id="cb27-202"><a href="#cb27-202" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">label =</span> team),</span>
-<span id="cb27-203"><a href="#cb27-203" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb27-204"><a href="#cb27-204" aria-hidden="true" tabindex="-1"></a>      <span class="at">nudge_x =</span> <span class="dv">2</span>,</span>
-<span id="cb27-205"><a href="#cb27-205" aria-hidden="true" tabindex="-1"></a>      <span class="at">direction =</span> <span class="st">"y"</span>,</span>
-<span id="cb27-206"><a href="#cb27-206" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">0</span>,</span>
-<span id="cb27-207"><a href="#cb27-207" aria-hidden="true" tabindex="-1"></a>      <span class="at">segment.size =</span> <span class="fl">0.3</span></span>
-<span id="cb27-208"><a href="#cb27-208" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb27-209"><a href="#cb27-209" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">"off"</span>)<span class="sc">+</span></span>
-<span id="cb27-210"><a href="#cb27-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb27-211"><a href="#cb27-211" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> division_name</span>
-<span id="cb27-212"><a href="#cb27-212" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-213"><a href="#cb27-213" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb27-214"><a href="#cb27-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(division_graph)</span>
-<span id="cb27-215"><a href="#cb27-215" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-216"><a href="#cb27-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-217"><a href="#cb27-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-218"><a href="#cb27-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### NFC Teams Wins</span></span>
-<span id="cb27-219"><a href="#cb27-219" aria-hidden="true" tabindex="-1"></a>These charts show each teams win total in a season against everyone else in their specific division. This can help show if there is a division winner in the season. This section is for NFC teams</span>
-<span id="cb27-222"><a href="#cb27-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-223"><a href="#cb27-223" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"NFC South"</span>) </span>
-<span id="cb27-224"><a href="#cb27-224" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"NFC North"</span>)</span>
-<span id="cb27-225"><a href="#cb27-225" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"NFC West"</span>)</span>
-<span id="cb27-226"><a href="#cb27-226" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"NFC East"</span>)</span>
-<span id="cb27-227"><a href="#cb27-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-228"><a href="#cb27-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-229"><a href="#cb27-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-230"><a href="#cb27-230" aria-hidden="true" tabindex="-1"></a><span class="fu">### AFC Teams Wins</span></span>
-<span id="cb27-231"><a href="#cb27-231" aria-hidden="true" tabindex="-1"></a>These charts show each teams win total in a season against everyone else in their specific division. This can help show if there is a division winner in the season. This section is for AFC teams</span>
-<span id="cb27-234"><a href="#cb27-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-235"><a href="#cb27-235" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"AFC South"</span>)</span>
-<span id="cb27-236"><a href="#cb27-236" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"AFC North"</span>)</span>
-<span id="cb27-237"><a href="#cb27-237" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"AFC West"</span>)</span>
-<span id="cb27-238"><a href="#cb27-238" aria-hidden="true" tabindex="-1"></a><span class="fu">specific_division</span>(<span class="st">"AFC East"</span>) </span>
-<span id="cb27-239"><a href="#cb27-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-240"><a href="#cb27-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-241"><a href="#cb27-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-242"><a href="#cb27-242" aria-hidden="true" tabindex="-1"></a><span class="fu"># Statistical Visuals</span></span>
-<span id="cb27-243"><a href="#cb27-243" aria-hidden="true" tabindex="-1"></a>During this section, I wanted to look at different visuals that could illustrate more statistical analysis. Some of the following would include if there is a correlation between wins and many other factors, such as total yards, point differentials, and other key factors, this could be done over all of the different seasons to see if there is a trend.</span>
-<span id="cb27-244"><a href="#cb27-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-245"><a href="#cb27-245" aria-hidden="true" tabindex="-1"></a><span class="fu">## Wins with Yards(Total, rushing, and passing)</span></span>
-<span id="cb27-248"><a href="#cb27-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-249"><a href="#cb27-249" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> total_yards, <span class="at">color =</span> year)) <span class="sc">+</span></span>
-<span id="cb27-250"><a href="#cb27-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb27-251"><a href="#cb27-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb27-252"><a href="#cb27-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
-<span id="cb27-253"><a href="#cb27-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb27-254"><a href="#cb27-254" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Total Yards"</span>,</span>
-<span id="cb27-255"><a href="#cb27-255" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb27-256"><a href="#cb27-256" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb27-257"><a href="#cb27-257" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Yards in a Season"</span></span>
-<span id="cb27-258"><a href="#cb27-258" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-259"><a href="#cb27-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-260"><a href="#cb27-260" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> rush_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
-<span id="cb27-261"><a href="#cb27-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb27-262"><a href="#cb27-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb27-263"><a href="#cb27-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
-<span id="cb27-264"><a href="#cb27-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb27-265"><a href="#cb27-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Rushing Yards"</span>,</span>
-<span id="cb27-266"><a href="#cb27-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many rushing yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb27-267"><a href="#cb27-267" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb27-268"><a href="#cb27-268" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
-<span id="cb27-269"><a href="#cb27-269" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-270"><a href="#cb27-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-271"><a href="#cb27-271" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> pass_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
-<span id="cb27-272"><a href="#cb27-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb27-273"><a href="#cb27-273" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb27-274"><a href="#cb27-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
-<span id="cb27-275"><a href="#cb27-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb27-276"><a href="#cb27-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Passing Yards"</span>,</span>
-<span id="cb27-277"><a href="#cb27-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many passing yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb27-278"><a href="#cb27-278" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb27-279"><a href="#cb27-279" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Yards in a Season"</span></span>
-<span id="cb27-280"><a href="#cb27-280" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-281"><a href="#cb27-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-282"><a href="#cb27-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-283"><a href="#cb27-283" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(<span class="fu">factor</span>(wins), total_yards, <span class="at">.fun =</span> quantile, .<span class="dv">75</span>), <span class="at">y =</span> total_yards, <span class="at">fill =</span> wins)) <span class="sc">+</span></span>
-<span id="cb27-284"><a href="#cb27-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb27-285"><a href="#cb27-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span> </span>
-<span id="cb27-286"><a href="#cb27-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb27-287"><a href="#cb27-287" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span><span class="st">"none"</span> </span>
-<span id="cb27-288"><a href="#cb27-288" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb27-289"><a href="#cb27-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb27-290"><a href="#cb27-290" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total Yards by Wins"</span>,</span>
-<span id="cb27-291"><a href="#cb27-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb27-292"><a href="#cb27-292" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb27-293"><a href="#cb27-293" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
-<span id="cb27-294"><a href="#cb27-294" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-295"><a href="#cb27-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-296"><a href="#cb27-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-297"><a href="#cb27-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-298"><a href="#cb27-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-299"><a href="#cb27-299" aria-hidden="true" tabindex="-1"></a><span class="fu">### Anaylsis:</span></span>
-<span id="cb27-300"><a href="#cb27-300" aria-hidden="true" tabindex="-1"></a>In the graph above, I created a graph that would visualize the correlation between how many wins a team would get in a season with the amount of yards it would need. From the first visual, you can see that if a team is able to get more total yards, they would be able to win more games. The same is shown with the rushing and passing yards. Following making the scatter plot correlations, I made a visual of a box plot that would order the wins based the third quantile of total yards. This shows what win totals is most likely going to happen.</span>
-<span id="cb27-301"><a href="#cb27-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-302"><a href="#cb27-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-303"><a href="#cb27-303" aria-hidden="true" tabindex="-1"></a><span class="fu">## Penalties to losses</span></span>
-<span id="cb27-304"><a href="#cb27-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-307"><a href="#cb27-307" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb27-308"><a href="#cb27-308" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> losses, <span class="at">y =</span>penalties)) <span class="sc">+</span></span>
-<span id="cb27-309"><a href="#cb27-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb27-310"><a href="#cb27-310" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span></span>
-<span id="cb27-311"><a href="#cb27-311" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb27-312"><a href="#cb27-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-313"><a href="#cb27-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb27-314"><a href="#cb27-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-315"><a href="#cb27-315" aria-hidden="true" tabindex="-1"></a><span class="fu">### Analysis:</span></span>
-<span id="cb27-316"><a href="#cb27-316" aria-hidden="true" tabindex="-1"></a>This graph was to see what the correlation between losses and penalties. As we can see, there is a small, yet very weak correlation. When I first did this, I thought that if a team was penalized more, they would have more losses. However, it does not show that truly.</span>
-<span id="cb27-317"><a href="#cb27-317" aria-hidden="true" tabindex="-1"></a> </span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

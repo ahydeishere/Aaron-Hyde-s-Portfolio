@@ -54,7 +54,7 @@ The main problems with the wrangling this data set is making it so that all the 
 
 Another thing that I noticed with this data set is that there were a lot of different stats that were in this data set, but they were not important to me, so I filtered them out so that way they would not produce a problem for me in the long run. Some of these included mov (margin of victory), g(games played), and exp_pts_tot columns. These columns did not seem necessary to me while making these visuals, so I filtered them out here.
 
-The other issue was that there were a lot of NA in the ties column. These NA were blank in the spreed sheet because there was no ties during that season. Other season had some ties. So I replaced all of the NA in the Ties column with 0 because there was a value. 
+The other issue was that there were a lot of NA in the ties column. These NA were blank in the spreed sheet because there was no ties during that season. Other season had some ties. So I replaced all of the NA in the Ties column with 0 because there was a value.  
 
 
 # Visuals/Funcitons for Specific Teams/Divisions/seasons
@@ -225,8 +225,25 @@ specific_division("AFC East")
 
 ```
 
+
+## Win Loss Percentages
+```{r}
+
+divisions <- nfl_data_cleaned %>%
+  group_by(team) %>%
+  summarise(avg_win_loss = mean(win_loss_perc, na.rm = TRUE)) %>%
+  arrange(desc(avg_win_loss))
+
+tibble(divisions)
+
+```
+
+### Analysis:
+This is to see how on average these teams have been over the last 2 decades. As we can see, some teams performed better overall than other teams.
+
 # Statistical Visuals
 During this section, I wanted to look at different visuals that could illustrate more statistical analysis. Some of the following would include if there is a correlation between wins and many other factors, such as total yards, point differentials, and other key factors, this could be done over all of the different seasons to see if there is a trend.
+
 
 ## Wins with Yards(Total, rushing, and passing)
 ```{r}
@@ -298,4 +315,4 @@ ggplot(nfl_data_cleaned, aes(x = losses, y =penalties)) +
 
 ### Analysis:
 This graph was to see what the correlation between losses and penalties. As we can see, there is a small, yet very weak correlation. When I first did this, I thought that if a team was penalized more, they would have more losses. However, it does not show that truly.
- 
+
