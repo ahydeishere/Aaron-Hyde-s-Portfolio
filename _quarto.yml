@@ -134,6 +134,12 @@ website:
         - text: "Project 3"
           file: Competition/project3.qmd
         - text: "---"
+    - title: "Wrangling/Visualizations"
+      style: "docked"
+      background: light
+      contents: 
+        - text: "Final Project"
+          file: final_ds350_project.qmd
 
   
 format:  

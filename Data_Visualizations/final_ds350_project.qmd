@@ -1,0 +1,295 @@
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = TRUE)
+```
+
+```{r}
+pacman::p_load(tidyverse, readr, readxl, downloader, rio, plotly, knitr, pander, ggthemes, ggrepel, directlabels, gapminder, dplyr, nycflights13, Lahman, priceR, riem, USAboundaries, USAboundariesData, sf, stringr, stringi, reticulate)
+```
+
+
+```{r}
+
+nfl_data_set <- read_csv("C:/Users/aaron/OneDrive/Desktop/nfl_data/team_stats_2003_2023.csv")
+
+```
+
+# Cleaning the data set
+
+```{r}
+nfl_data_cleaned <- nfl_data_set %>%
+  select(-mov, -g, -exp_pts_tot) %>%
+  mutate(team = str_replace_all(team, "Oakland Raiders", "Las Vegas Raiders"),
+         team = str_replace_all(team, "Washington Redskins", "Washington Commanders"),
+         team = str_replace_all(team, "Washington Football Team", "Washington Commanders"),
+         team = str_replace_all(team, "San Diego Chargers", "Los Angeles Chargers"),
+         team = str_replace_all(team, "St. Louis Rams", "Los Angeles Rams"),
+         ties = as.numeric(ties),
+         ties = replace_na(ties, 0),
+         division = case_when(
+    team %in% c("Buffalo Bills", "Miami Dolphins", "New England Patriots", "New York Jets") ~ "AFC East",
+    team %in% c("Baltimore Ravens", "Cincinnati Bengals", "Cleveland Browns", "Pittsburgh Steelers") ~ "AFC North",
+    team %in% c("Houston Texans", "Indianapolis Colts", "Jacksonville Jaguars", "Tennessee Titans") ~ "AFC South",
+    team %in% c("Denver Broncos", "Kansas City Chiefs", "Las Vegas Raiders", "Los Angeles Chargers") ~ "AFC West",
+    team %in% c("Dallas Cowboys", "New York Giants", "Philadelphia Eagles", "Washington Commanders") ~ "NFC East",
+    team %in% c("Chicago Bears", "Detroit Lions", "Green Bay Packers", "Minnesota Vikings") ~ "NFC North",
+    team %in% c("Atlanta Falcons", "Carolina Panthers", "New Orleans Saints", "Tampa Bay Buccaneers") ~ "NFC South",
+    team %in% c("Arizona Cardinals", "Los Angeles Rams", "San Francisco 49ers", "Seattle Seahawks") ~ "NFC West",
+    TRUE ~ NA_character_
+  ))
+
+glimpse(nfl_data_cleaned)
+#unique(nfl_data_set$team)
+#unique(nfl_data_cleaned$team)
+```
+## Data Wrangling Issues/Solutions
+
+The main problems with the wrangling this data set is making it so that all the teams that were the same would still be classified. For example, There were a lot of teams that have moved to different locations over the last 2 decades, as well as a re branding of a team. The main teams that faced that issue were the Rams, Raiders, Chargers, and the Commanders. Because this data set has the name of the city or state first, some teams were called by the city then the mascot. So in order to change that, I set them to where their present day team are. The next hiccup was with the Washington Commanders. All the way until 2020, the commanders were known as the redskins. They changed their name to the Washington Football Team for a season or two, but then eventually landed on the Commanders as their team name. So in order to see how they did as a who over the last couple decades, I changed the name so that way it would be their present day names.
+
+Another thing that I noticed with this data set is that there were a lot of different stats that were in this data set, but they were not important to me, so I filtered them out so that way they would not produce a problem for me in the long run. Some of these included mov (margin of victory), g(games played), and exp_pts_tot columns. These columns did not seem necessary to me while making these visuals, so I filtered them out here.
+
+The other issue was that there were a lot of NA in the ties column. These NA were blank in the spreed sheet because there was no ties during that season. Other season had some ties. So I replaced all of the NA in the Ties column with 0 because there was a value. 
+
+
+# Visuals/Funcitons for Specific Teams/Divisions/seasons
+During this part, I made multiple different visualizations to highlight specific data, such as wins in a specific season, point differential changes for a team, or how division teams win totals are different. Before each visual, there is a subtitle to highlight what each code is producing. Some may not have functions or filters, but I am hoping that the visuals still help.
+
+## Yards per Season
+```{r}
+yards_per_season <- function(season){
+  
+  season_yards <- nfl_data_cleaned %>%
+    filter(year == season) 
+  
+  ggplot(season_yards, aes(x = total_yards, y = reorder(team, total_yards), fill = division)) +
+    geom_col() +
+    theme_classic() +
+    scale_x_continuous(labels = scales::comma) +
+    theme(
+      legend.position = "bottom"
+    )+
+    labs(
+      title = paste0(season, " Season"), 
+      x = "Total Yards",
+      y = "Team"
+    )
+}
+```
+
+
+### Examples
+In these visuals, you can see that there are different visuals for the total yards that each team was able to get over the different seasons. This is filtered out by the seasons, so you input what year you want to see and it will sort it from the team with the most years to the team with the least amount of yards.
+```{r}
+
+yards_per_season(2005)
+yards_per_season(2020)
+
+```
+
+
+
+## Point Differential Visual
+```{r}
+
+point_differential_visualization <- function(team_name) {
+  team_data <- nfl_data_cleaned %>%
+    filter(team == {{team_name}}) %>%
+    mutate(result = if_else(points_diff > 0, "Positive", "Negative"))
+
+  ggplot(team_data, aes(x = year, y = points_diff, fill = result)) +
+    geom_col() +
+    geom_text(
+      aes(label = points_diff,
+          vjust = if_else(points_diff >= 0, -0.5, 1.5)),
+      size = 3
+    ) +
+    scale_fill_manual(values = c("Positive" = "green4", "Negative" = "red3")) +
+    theme_bw()+
+    theme(legend.position = "none",
+          panel.grid.major.x = element_blank(),
+          panel.grid.minor.x = element_blank()) +
+    labs(
+      title = team_name,
+      subtitle = "This is the point differential from 2003 to 2023",
+      x = "Years",
+      y = "Point Differential"
+      )
+  
+}
+
+```
+
+### Examples
+These are following examples of how the point differential is visualized. This shows how each team has done verses all of there other teams. The point differential is shown to visualize if they scored more points overall in a season or less points overall in a season
+```{r}
+
+point_differential_visualization("New York Giants")
+point_differential_visualization("Los Angeles Rams")
+point_differential_visualization("New England Patriots")
+
+```
+
+
+## Wins by Divisions
+
+```{r}
+specific_division <- function(division_name) {
+  
+  team_specific <- nfl_data_cleaned %>%
+    filter(division == division_name)       
+
+  team_colors <- c(
+  # NFC North
+  "Chicago Bears"            = "#0B162A", "Detroit Lions"            = "#0076B6", "Green Bay Packers"        = "#203731", "Minnesota Vikings"        = "#4F2683",
+
+  # NFC South
+  "Atlanta Falcons"          = "#A71930", "Carolina Panthers"        = "#0085CA", "New Orleans Saints"       = "#D3BC8D", "Tampa Bay Buccaneers"     = "#D50A0A",
+
+  # NFC East
+  "Dallas Cowboys"           = "#003594", "New York Giants"          = "#0B2265", "Philadelphia Eagles"      = "#004C54", "Washington Commanders"    = "#5A1414",
+
+  # NFC West
+  "Arizona Cardinals"        = "#97233F", "Los Angeles Rams"         = "#003594", "San Francisco 49ers"      = "#AA0000", "Seattle Seahawks"         = "#002244",
+
+  # AFC North
+  "Baltimore Ravens"         = "#241773", "Cincinnati Bengals"       = "#FB4F14", "Cleveland Browns"         = "#311D00", "Pittsburgh Steelers"      = "#FFB612",
+
+  # AFC South
+  "Houston Texans"           = "#03202F", "Indianapolis Colts"       = "#002C5F", "Jacksonville Jaguars"     = "#006778", "Tennessee Titans"         = "#0C2340",
+
+  # AFC East
+  "Buffalo Bills"            = "#00338D", "Miami Dolphins"           = "#008E97", "New England Patriots"     = "#002244", "New York Jets"            = "#125740",
+
+  # AFC West
+  "Denver Broncos"           = "#FB4F14", "Kansas City Chiefs"       = "#E31837", "Las Vegas Raiders"        = "#000000", "Los Angeles Chargers"     = "#0080C6"
+  )
+
+  division_graph <- ggplot(team_specific, aes(y = wins, x = year, color = team)) +  
+    geom_line() +
+    scale_x_continuous(limits = c(NA, 2027), breaks = c(2000, 2005, 2010,2015,2020)) +
+    scale_y_continuous(breaks = c(2,4,6,8,10,12,14,16))+
+    scale_color_manual(values = team_colors) +
+    theme_classic() +
+    theme(
+      legend.position = "none",
+      plot.margin = margin(5, 90, 5, 5),
+  axis.line.y = element_line(color = "black", linewidth = 0.5),
+  axis.line.x = element_line(color = "black", linewidth = 0.5), 
+  panel.grid.major.y = element_line(color = "gray80", linewidth = 0.3),
+  panel.grid.major.x = element_line(color = "gray80", linewidth = 0.3),
+  panel.grid.minor.y = element_line(color = "gray90", linewidth = 0.2)
+) +
+    geom_text_repel(
+      data = team_specific %>% filter(year == max(year)), 
+      aes(label = team),
+      size = 3,
+      nudge_x = 2,
+      direction = "y",
+      hjust = 0,
+      segment.size = 0.3
+    ) +
+    coord_cartesian(clip = "off")+
+  labs(
+    title = division_name
+  )
+  
+  return(division_graph)
+}
+```
+
+### NFC Teams Wins
+These charts show each teams win total in a season against everyone else in their specific division. This can help show if there is a division winner in the season. This section is for NFC teams
+```{r}
+
+specific_division("NFC South") 
+specific_division("NFC North")
+specific_division("NFC West")
+specific_division("NFC East")
+
+```
+
+### AFC Teams Wins
+These charts show each teams win total in a season against everyone else in their specific division. This can help show if there is a division winner in the season. This section is for AFC teams
+```{r}
+
+specific_division("AFC South")
+specific_division("AFC North")
+specific_division("AFC West")
+specific_division("AFC East") 
+
+```
+
+# Statistical Visuals
+During this section, I wanted to look at different visuals that could illustrate more statistical analysis. Some of the following would include if there is a correlation between wins and many other factors, such as total yards, point differentials, and other key factors, this could be done over all of the different seasons to see if there is a trend.
+
+## Wins with Yards(Total, rushing, and passing)
+```{r}
+
+ggplot(nfl_data_cleaned, aes(x = wins, y = total_yards, color = year)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_calc() +
+  labs(
+    title ="Correlation Between Wins and Total Yards",
+    subtitle ="How many total yards a team should get in order to get the desired win total",
+    x = "Win Total",
+    y = "Total Yards in a Season"
+  )
+
+ggplot(nfl_data_cleaned, aes(x = wins, y = rush_yds, color = year)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_calc() +
+  labs(
+    title ="Correlation Between Wins and Rushing Yards",
+    subtitle ="How many rushing yards a team should get in order to get the desired win total",
+    x = "Win Total",
+    y = "Total Rushing Yards in a Season"
+  )
+
+ggplot(nfl_data_cleaned, aes(x = wins, y = pass_yds, color = year)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_calc() +
+  labs(
+    title ="Correlation Between Wins and Passing Yards",
+    subtitle ="How many passing yards a team should get in order to get the desired win total",
+    x = "Win Total",
+    y = "Total Yards in a Season"
+  )
+
+
+ggplot(nfl_data_cleaned, aes(x = fct_reorder(factor(wins), total_yards, .fun = quantile, .75), y = total_yards, fill = wins)) +
+  geom_boxplot() +
+  theme_calc() + 
+  theme(
+    legend.position ="none" 
+  ) +
+  labs(
+    title = "Total Yards by Wins",
+    subtitle = "How many total yards a team should get in order to get the desired win total",
+    x = "Win Total",
+    y = "Total Rushing Yards in a Season"
+  )
+
+
+```
+
+### Anaylsis:
+In the graph above, I created a graph that would visualize the correlation between how many wins a team would get in a season with the amount of yards it would need. From the first visual, you can see that if a team is able to get more total yards, they would be able to win more games. The same is shown with the rushing and passing yards. Following making the scatter plot correlations, I made a visual of a box plot that would order the wins based the third quantile of total yards. This shows what win totals is most likely going to happen.
+
+
+## Penalties to losses
+
+```{r}
+
+ggplot(nfl_data_cleaned, aes(x = losses, y =penalties)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  theme_bw()
+
+```
+
+### Analysis:
+This graph was to see what the correlation between losses and penalties. As we can see, there is a small, yet very weak correlation. When I first did this, I thought that if a team was penalized more, they would have more losses. However, it does not show that truly.
+ 
