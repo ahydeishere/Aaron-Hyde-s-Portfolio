@@ -744,22 +744,150 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_win_loss =</span> <span class="fu">mean</span>(win_loss_perc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_win_loss))</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(divisions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 32 × 2
-   team                 avg_win_loss
-   &lt;chr&gt;                       &lt;dbl&gt;
- 1 New England Patriots        0.714
- 2 Pittsburgh Steelers         0.632
- 3 Green Bay Packers           0.614
- 4 Indianapolis Colts          0.605
- 5 Baltimore Ravens            0.599
- 6 Seattle Seahawks            0.584
- 7 Kansas City Chiefs          0.577
- 8 Philadelphia Eagles         0.575
- 9 Dallas Cowboys              0.574
-10 New Orleans Saints          0.573
-# ℹ 22 more rows</code></pre>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(divisions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">team</th>
+<th style="text-align: center;">avg_win_loss</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">New England Patriots</td>
+<td style="text-align: center;">0.7135</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Pittsburgh Steelers</td>
+<td style="text-align: center;">0.632</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Green Bay Packers</td>
+<td style="text-align: center;">0.614</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Indianapolis Colts</td>
+<td style="text-align: center;">0.6048</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Baltimore Ravens</td>
+<td style="text-align: center;">0.599</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Seattle Seahawks</td>
+<td style="text-align: center;">0.5836</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Kansas City Chiefs</td>
+<td style="text-align: center;">0.577</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Philadelphia Eagles</td>
+<td style="text-align: center;">0.5746</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Dallas Cowboys</td>
+<td style="text-align: center;">0.5742</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">New Orleans Saints</td>
+<td style="text-align: center;">0.5733</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Denver Broncos</td>
+<td style="text-align: center;">0.5295</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Los Angeles Chargers</td>
+<td style="text-align: center;">0.5288</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Minnesota Vikings</td>
+<td style="text-align: center;">0.528</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Cincinnati Bengals</td>
+<td style="text-align: center;">0.5027</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Atlanta Falcons</td>
+<td style="text-align: center;">0.4996</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Buffalo Bills</td>
+<td style="text-align: center;">0.4904</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Tennessee Titans</td>
+<td style="text-align: center;">0.487</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Carolina Panthers</td>
+<td style="text-align: center;">0.4785</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">San Francisco 49ers</td>
+<td style="text-align: center;">0.4747</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Chicago Bears</td>
+<td style="text-align: center;">0.4707</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Miami Dolphins</td>
+<td style="text-align: center;">0.4623</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">New York Giants</td>
+<td style="text-align: center;">0.4566</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Los Angeles Rams</td>
+<td style="text-align: center;">0.4434</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Arizona Cardinals</td>
+<td style="text-align: center;">0.4433</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Houston Texans</td>
+<td style="text-align: center;">0.439</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Tampa Bay Buccaneers</td>
+<td style="text-align: center;">0.4355</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">New York Jets</td>
+<td style="text-align: center;">0.4137</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Washington Commanders</td>
+<td style="text-align: center;">0.4016</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Jacksonville Jaguars</td>
+<td style="text-align: center;">0.3834</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Detroit Lions</td>
+<td style="text-align: center;">0.3829</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Las Vegas Raiders</td>
+<td style="text-align: center;">0.365</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Cleveland Browns</td>
+<td style="text-align: center;">0.3454</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <section id="analysis" class="level3">
@@ -774,16 +902,16 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <section id="wins-with-yardstotal-rushing-and-passing" class="level2">
 <h2 class="anchored" data-anchor-id="wins-with-yardstotal-rushing-and-passing">Wins with Yards(Total, rushing, and passing)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> total_yards, <span class="at">color =</span> year)) <span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Total Yards"</span>,</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Yards in a Season"</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> total_yards, <span class="at">color =</span> year)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Total Yards"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Yards in a Season"</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -791,16 +919,16 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> rush_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Rushing Yards"</span>,</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many rushing yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> rush_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Rushing Yards"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many rushing yards a team should get in order to get the desired win total"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -808,16 +936,16 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> pass_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Passing Yards"</span>,</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many passing yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Yards in a Season"</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> wins, <span class="at">y =</span> pass_yds, <span class="at">color =</span> year)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span><span class="st">"Correlation Between Wins and Passing Yards"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span><span class="st">"How many passing yards a team should get in order to get the desired win total"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Yards in a Season"</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -825,18 +953,18 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(<span class="fu">factor</span>(wins), total_yards, <span class="at">.fun =</span> quantile, .<span class="dv">75</span>), <span class="at">y =</span> total_yards, <span class="at">fill =</span> wins)) <span class="sc">+</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span> </span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span><span class="st">"none"</span> </span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total Yards by Wins"</span>,</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(<span class="fu">factor</span>(wins), total_yards, <span class="at">.fun =</span> quantile, .<span class="dv">75</span>), <span class="at">y =</span> total_yards, <span class="at">fill =</span> wins)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_calc</span>() <span class="sc">+</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span><span class="st">"none"</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Total Yards by Wins"</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"How many total yards a team should get in order to get the desired win total"</span>,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Total"</span>,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Rushing Yards in a Season"</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -853,10 +981,10 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <section id="penalties-to-losses" class="level2">
 <h2 class="anchored" data-anchor-id="penalties-to-losses">Penalties to losses</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> losses, <span class="at">y =</span>penalties)) <span class="sc">+</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nfl_data_cleaned, <span class="fu">aes</span>(<span class="at">x =</span> losses, <span class="at">y =</span>penalties)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

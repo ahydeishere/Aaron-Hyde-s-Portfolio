@@ -234,7 +234,7 @@ divisions <- nfl_data_cleaned %>%
   summarise(avg_win_loss = mean(win_loss_perc, na.rm = TRUE)) %>%
   arrange(desc(avg_win_loss))
 
-tibble(divisions)
+pander(divisions)
 
 ```
 
