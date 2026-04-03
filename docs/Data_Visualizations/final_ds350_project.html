@@ -742,9 +742,10 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>divisions <span class="ot">&lt;-</span> nfl_data_cleaned <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(team) <span class="sc">%&gt;%</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_win_loss =</span> <span class="fu">mean</span>(win_loss_perc, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_win_loss))</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(divisions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_win_loss)) </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pander</span>(divisions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
@@ -892,7 +893,7 @@ $ division             &lt;chr&gt; "AFC East", "AFC East", "AFC East", "AFC East
 </div>
 <section id="analysis" class="level3">
 <h3 class="anchored" data-anchor-id="analysis">Analysis:</h3>
-<p>This is to see how on average these teams have been over the last 2 decades. As we can see, some teams performed better overall than other teams.</p>
+<p>This is to see how on average these teams have been over the last 2 decades. This visual is done as a table because I believe that this is a very simple way to show what is truly doing worse overall. Some teams in recent years are doing better, but may overall be a worse off team in history.</p>
 </section>
 </section>
 </section>

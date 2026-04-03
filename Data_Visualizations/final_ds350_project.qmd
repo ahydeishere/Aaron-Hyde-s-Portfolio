@@ -232,14 +232,15 @@ specific_division("AFC East")
 divisions <- nfl_data_cleaned %>%
   group_by(team) %>%
   summarise(avg_win_loss = mean(win_loss_perc, na.rm = TRUE)) %>%
-  arrange(desc(avg_win_loss))
+  arrange(desc(avg_win_loss)) 
+  
 
 pander(divisions)
 
 ```
 
 ### Analysis:
-This is to see how on average these teams have been over the last 2 decades. As we can see, some teams performed better overall than other teams.
+This is to see how on average these teams have been over the last 2 decades. This visual is done as a table because I believe that this is a very simple way to show what is truly doing worse overall. Some teams in recent years are doing better, but may overall be a worse off team in history.
 
 # Statistical Visuals
 During this section, I wanted to look at different visuals that could illustrate more statistical analysis. Some of the following would include if there is a correlation between wins and many other factors, such as total yards, point differentials, and other key factors, this could be done over all of the different seasons to see if there is a trend.
