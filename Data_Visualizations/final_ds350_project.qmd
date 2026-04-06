@@ -2,6 +2,10 @@
 title: "DS 350 Final Poject"
 subtitle: "A visual/analysis on NFL data"
 author: "Aaron Hyde"
+
+format: 
+  html:
+    code-fold: true
 ---
 
 
