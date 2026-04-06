@@ -65,26 +65,32 @@ During this part, I made multiple different visualizations to highlight specific
 yards_per_season <- function(season){
   
   season_yards <- nfl_data_cleaned %>%
-    filter(year == season) 
+    filter(year == season) %>%
+    mutate(conference = str_extract(division, "AFC|NFC"))
   
-  ggplot(season_yards, aes(x = total_yards, y = reorder(team, total_yards), fill = division)) +
+  ggplot(season_yards, aes(x = total_yards, y = reorder(team, total_yards), fill = conference)) +
     geom_col() +
     theme_classic() +
     scale_x_continuous(labels = scales::comma) +
+    scale_fill_manual(
+      values = c("AFC" = "red2", "NFC" = "blue3")
+    ) +
     theme(
       legend.position = "bottom"
-    )+
+    ) +
     labs(
       title = paste0(season, " Season"), 
       x = "Total Yards",
-      y = "Team"
+      y = "Team",
+      fill = "Conference"
     )
 }
+
 ```
 
 
 ### Examples
-In these visuals, you can see that there are different visuals for the total yards that each team was able to get over the different seasons. This is filtered out by the seasons, so you input what year you want to see and it will sort it from the team with the most years to the team with the least amount of yards.
+In these visuals, you can see that there are different visuals for the total yards that each team was able to get over the different seasons. This is filtered out by the seasons, so you input what year you want to see and it will sort it from the team with the most years to the team with the least amount of yards. There is also a color filter so that way you can see which conference, either the AFC or the NFC teams, are at the top of the league during those seasons. For example, in the 2005 season 6 of the top 10 teams in total yards are in the AFC.
 ```{r}
 
 yards_per_season(2005)
@@ -315,5 +321,8 @@ ggplot(nfl_data_cleaned, aes(x = losses, y =penalties)) +
 ```
 
 ### Analysis:
-This graph was to see what the correlation between losses and penalties. As we can see, there is a small, yet very weak correlation. When I first did this, I thought that if a team was penalized more, they would have more losses. However, it does not show that truly.
+This graph was to see what the correlation between losses and penalties. As we can see, there is a small, yet very weak correlation. When I first did this, I thought that if a team was penalized more, they would have more losses. However, it does not show that to be the full case. A team can take a lot of penilties, but they still may not loss a lot of games.
+
+
+
 
