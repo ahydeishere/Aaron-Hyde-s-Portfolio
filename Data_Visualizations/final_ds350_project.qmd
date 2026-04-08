@@ -108,7 +108,7 @@ The other issue was that there were a lot of NA in the ties column. These NA wer
 # Visuals/Funcitons for Specific Teams/Divisions/seasons
 During this part, I made multiple different visualizations to highlight specific data, such as wins in a specific season, point differential changes for a team, or how division teams win totals are different. Before each visual, there is a subtitle to highlight what each code is producing. Some may not have functions or filters, but I am hoping that the visuals still help.
 
-# Team Locations
+## Team Locations
 This is the visual from the nfl geom data set. This is to show different teams have been located over the different seasons. I will show it with the starting season, then the ending season to show how some teams have moved, while other teams have not.
 
 ```{r}
