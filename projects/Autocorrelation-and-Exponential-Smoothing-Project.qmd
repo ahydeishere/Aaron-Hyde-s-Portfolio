@@ -1,0 +1,404 @@
+---
+title: "Autocorrelation and Exponential Smoothing Project"
+subtitle: "Aaron Hyde"
+format: 
+  html:
+    embed-resources: true
+    toc: true
+---
+
+# Introduction
+
+As I come closer and closer to graduating with my bachelors degree in economics, I started to look for different opportunities that are in the job market. With this drive to join the market, I am curious on what the field will look like once I graduate. Today, I am going to be observing the participation rate of persons who have a bachelors degree or higher education. I am doing this to see what has happened in hopes to predict or observe what is going to happen in the future.
+
+# Data Selection and Cleaning
+
+### Packages
+
+```{r message=FALSE, warning=FALSE}
+#| code-fold: true
+#| code-summary: "Show the packages"
+
+# Loading R packages
+pacman::p_load(
+  tidyverse,  # ggplot, mutate(), cleaning...
+  tsibble,    # as_tsibble()
+  fable,      # model(...), forecast(), tidy(), glance()...
+  feasts,     # ACF(), PACF()
+  ggtime,     # autoplot() for tsibbles
+  rio,        # import()
+  pander,     # pander() markdown tables
+  patchwork   # + and / for ggplots
+)
+```
+
+## Importing Data
+
+The data that I am using is taken from Federal Reserve website from St. Louis. The link is here: <https://fred.stlouisfed.org/series/LNS11327662> 
+
+```{r message=FALSE, warning=FALSE}
+#| code-fold: true
+#| code-summary: "Data on Labor Participation for People with a Bachelors Degree or Higher."
+
+degree_participation <- read_csv(
+  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=LNS11327662"
+)
+
+```
+
+## Cleaning/Mutating Data
+
+When I say I am cleaning and mutating the data, I am going to to change the dates to be a specific format, have the column names be specific, and make sure that there is not missing points in our data set. There is going to be data missing for the month of October of the year 2025 due to the government shutdown. This will help with creating visualizations of the data as well as the observing the Holt-Winters Model.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+# This cleaning is meant to help clarify the names of the columns make things better.
+degree_participation_tb <- degree_participation |>
+  mutate(
+    Date = lubridate::ymd(observation_date),
+    year = lubridate::year(Date),
+    month = lubridate::month(Date),
+    day = lubridate::day(Date)
+  ) |>
+  rename(participation_rate = LNU01327662) |>
+  dplyr::select(Date, year, month, day, participation_rate) #|>
+#  tidyr::drop_na()
+
+
+# This part is to help clean up for the Holt-Winters
+degree_participation_ts <- degree_participation_tb |>
+  dplyr::select(Date, participation_rate) |>
+  dplyr::mutate(Month = tsibble::yearmonth(Date)) |>
+  dplyr::select(Month, participation_rate) |>
+  tsibble::as_tsibble(index = Month) |>
+  tsibble::fill_gaps() |>
+  dplyr::mutate(
+    participation_rate = zoo::na.approx(
+      participation_rate,
+      na.rm = FALSE
+    )
+  )
+pander(head(degree_participation_ts, 12))
+
+```
+
+## Data Visualization
+
+This is the data as we can currently see it as before apply the Holt-Winters model. What we see is that there is a steady trend showing that there is less and less collage graduates who are participating in the work force. There could be many reasons to this, such as unwanted work environments, less people getting degrees, those with degrees are retiring faster than college graduates coming, or other reasons. Note: there is a gap in October 2025 due to the government shutdown so no data is collected there. However with the data cleaning, it will show as a smooth line rather than a gap in the data. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+ggplot(degree_participation_tb, aes(x = Date, y = participation_rate)) +
+  geom_line(color = "steelblue") +
+  theme_bw() +
+  labs(
+    title = "Participation Rate for Bachelor Degrees and Higher",
+    subtitle = "This is no the full participation rate, just the participation rate for people with any collage degree",
+    x = "Date",
+    y = "Participation rate (%)"
+  )
+```
+
+# Holt-Winters Smoothing Models {.tabset .tabset-fade .tabset-pills}
+
+## Additive
+
+Here is the Additive Holt-Winters Model. 
+
+### Observations & Parameters
+
+The parameters that were used for this model was the parameters set by R, shown here:
+
+$$ \alpha = 0.7348125 $$
+$$ \beta  = 0.0001045924 $$
+$$ \gamma = 0.01861626  $$
+
+Each of these parameters are looking at a different part of the model to help see what we will see in the future based on what we see now. The parameter of $\alpha$ is looking at the level, or where the observation is currently at on the graph. The $\beta$ is looking at where the data was to then see where it potentially will go, predicting the slope. Finally, the $\gamma$ is looking at what happened last year to see what could happen this year. Each of these parameters have similar effects in the multiplicative model, as well as the same chosen values.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+# degree_participation_ts
+
+degree_participation_hw_add <- degree_participation_ts |>
+  tsibble::fill_gaps() |>
+  model(Additive = ETS(participation_rate ~
+        error("A") +
+        trend("A") +
+        season("A"),
+        opt_crit = "amse", nmse = 1))
+
+report(degree_participation_hw_add)
+```
+
+And here is the autoplot of the model and all of the different components within the model.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+autoplot(components(degree_participation_hw_add)) 
+
+```
+
+The major thing that I would like to note is in the seasonality. The seasonality is shown to be relatively constant, only shrinking as time goes on. The major thing that should be noted is the peaks and the valleys. The peak is during the month of June. This may be noted as with there being more college graduates going into the work force in June after graduation. However, the valley of seasonality is in July. In other words, the highest participation rate seasonally is followed by the lowest participation rate seasonally. What could cause there to be low after a high? 
+
+What I have theorized is that some college graduates could feel burnt out after a month of applying for jobs and hearing nothing back, so they stop looking. Another reason could be that a high part of graduates are retiring during the month of July. There may be other reasons that could explain why June is high and July is low, and that could prove to be something to look more into.
+
+
+### Forecast Model
+
+Now that we have the Holt-Winters model cleaned up and ready, we will plot the forecast of what the future may look like. We will look at the next 12 months, with a 95% confidence level.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+degree_participation_forecast_add <- degree_participation_hw_add |>
+  forecast::forecast(h = "12 months") 
+
+degree_participation_forecast_add |>
+  autoplot(degree_participation_ts, level = 95) +
+  geom_line(aes(y = .fitted, color = "Fitted"),
+    data = augment(degree_participation_hw_add)) +
+  scale_color_discrete(name = "") +
+  theme_bw() +
+  labs(
+    title = "Holt Winters Additive Forcasting",
+    x = "Date",
+    y = "Participation rate (%)"
+  )
+```
+
+
+## Multiplicative
+
+Here is the Multiplicative Model
+
+### Observations & Parameters
+
+The parameters that were used for this model was the parameters set by R, shown here:
+
+$$ \alpha = 0.1797896$$
+$$ \beta  = 0.004005312$$
+$$ \gamma = 0.0001376364$$
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+degree_participation_hw_mult <- degree_participation_ts |>
+  tsibble::fill_gaps() |>
+  model(Additive = ETS(participation_rate ~
+        error("A") +
+        trend("A") +
+        season("M"),
+        opt_crit = "amse", nmse = 1))
+report(degree_participation_hw_mult)
+```
+
+And here is the autoplot of the model and all of the different components within the model.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+autoplot(components(degree_participation_hw_mult))
+```
+
+In the multiplicative model components, we see that there is a difference with the seasonality than from the additive model. 
+
+### Forecast Model
+
+Now that we have the Holt-Winters model cleaned up and ready, we will plot the forecast of what the future may look like. We will look at the next 12 months, with a 95% confidence level.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+degree_participation_forecast_mult <- degree_participation_hw_mult |>
+  forecast::forecast(h = "12 months") 
+
+degree_participation_forecast_mult |>
+  autoplot(degree_participation_ts, level = 95) +
+  geom_line(aes(y = .fitted, color = "Fitted"),
+    data = augment(degree_participation_hw_mult)) +
+  scale_color_discrete(name = "") +
+  theme_bw() +
+  labs(
+    title = "Holt Winters Additive Forcasting",
+    x = "Date",
+    y = "Participation rate (%)"
+  )
+```
+
+## Observations from both Additive/Multiplicative Models
+
+I wanted to highlight a certain part of the graph, from 2019-2027, going to 2027 to show the forecast of the model. The reason I choose these points it to highlight what happened before and after COVID-19.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+degree_participation_forecast_add |>
+  autoplot(
+    degree_participation_ts |> tsibble::filter_index("2019-01" ~ "2030-12"),
+    level = 95
+  ) +
+  geom_line(
+    aes(y = .fitted, color = "Fitted"),
+    data = augment(degree_participation_hw_add) |>
+      tsibble::filter_index("2019-01" ~ "2030-12")
+  ) +
+  scale_color_discrete(name = "") +
+  theme_bw() +
+  labs(
+    title = "Holt Winters Additive Forecasting",
+    subtitle = "This is only showing data from Jan 2019 to Dec 2027",
+    x = "Date",
+    y = "Participation rate (%)"
+  )
+degree_participation_forecast_mult |>
+  autoplot(
+    degree_participation_ts |> tsibble::filter_index("2019-01" ~ "2030-12"),
+    level = 95
+  ) +
+  geom_line(
+    aes(y = .fitted, color = "Fitted"),
+    data = augment(degree_participation_hw_mult) |>
+      tsibble::filter_index("2019-01" ~ "2030-12")
+  ) +
+  scale_color_discrete(name = "") +
+  theme_bw() +
+  labs(
+    title = "Holt Winters Multiplicative Forecasting",
+    subtitle = "This is only showing data from Jan 2019 to Dec 2027",
+    x = "Date",
+    y = "Participation rate (%)"
+  )
+
+```
+
+I hand selected this specific time in the series because it showed a major drop that appeared to never truly recover. We see that there is a major drop with COVID-19 outbreak, causing a lot of people to leave the labor force. After 2 years, the labor force seemed to have increased again. However, even after that increase, the data showed that we are currently near our lowest participation rate, even lower than COVID-19. This is a shocking realization that even without COVID-19, there still could have been a decrease that occurred. 
+
+The two models are both showing that there is going to be a downward trend that will be shown in the future, but we can see with a closer look that the additive model fits what is observed better than the multiplicative model. This could be explained in that the data is relatively linear with the level slowly going down as time changes. This does not mean, however, that the forecasting of the additive model will be better than the multiplicative model. That will still remains up to the persons choice.
+
+Bellow is a graph with both models overlapping each other:
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+idx <- tsibble::index_var(degree_participation_ts)  # e.g. "Month"
+start <- tsibble::yearmonth("2019 Jan")
+end   <- tsibble::yearmonth("2030 Dec")
+
+# Helper: plain tibble, standard time column (as Date), filtered to the range
+prep <- function(x, model_name = NULL) {
+  out <- x |>
+    tibble::as_tibble() |>
+    rename(time = all_of(idx)) |>
+    filter(time >= start, time <= end) |>
+    mutate(time = as.Date(time))
+  if (!is.null(model_name)) out <- mutate(out, Model = model_name)
+  out
+}
+
+# Observed data
+obs <- prep(degree_participation_ts)
+
+# Fitted values from both models
+fitted_both <- bind_rows(
+  prep(augment(degree_participation_hw_add),  "Additive"),
+  prep(augment(degree_participation_hw_mult), "Multiplicative")
+)
+
+# Forecasts and 95% intervals (hilo before converting to a tibble)
+fc_prep <- function(fc, model_name) {
+  fc |>
+    fabletools::hilo(level = 95) |>
+    fabletools::unpack_hilo(`95%`) |>
+    prep(model_name)
+}
+
+fc_both <- bind_rows(
+  fc_prep(degree_participation_forecast_add,  "Additive"),
+  fc_prep(degree_participation_forecast_mult, "Multiplicative")
+)
+
+model_cols <- c("Additive" = "red", "Multiplicative" = "green")
+
+ggplot() +
+  geom_ribbon(
+    data = fc_both,
+    aes(x = time, ymin = `95%_lower`, ymax = `95%_upper`, fill = Model),
+    alpha = 0.15
+  ) +
+  geom_line(data = obs, aes(x = time, y = participation_rate), color = "black") +
+  geom_line(data = fitted_both, aes(x = time, y = .fitted, color = Model)) +
+  geom_line(data = fc_both, aes(x = time, y = .mean, color = Model), linewidth = 0.9) +
+  scale_color_manual(values = model_cols, name = "Model") +
+  scale_fill_manual(values = model_cols, name = "Model") +
+  theme_bw() +
+  labs(
+    title = "Holt-Winters Additive vs. Multiplicative Forecasting",
+    subtitle = "Black = observed data; fitted values and forecasts share each model's color",
+    x = "Date",
+    y = "Participation rate (%)"
+  )
+```
+
+
+
+# Autocorrelation
+
+What autocorrelation is telling us is if there is any random components that appear to be affecting what is going to happen in the future. The graphs bellow will show if there is any random errors that are in the future have a significant effect. We will see both the additive and the multiplicative models. These graphs are called correlograms.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the Code"
+
+degree_participation_hw_add|>
+  components() |>
+  feasts::ACF(remainder, lag_max = 18) |>
+  autoplot() +
+  theme_bw() +
+  labs(
+    title = "Correlogram of the Additive Model",
+    x = "Periods (in Months)" 
+  )
+
+
+degree_participation_hw_mult |>
+  components() |>
+  feasts::ACF(remainder, lag_max = 18) |>
+  autoplot() +
+  theme_bw() +
+  labs(
+    title = "Correlogram of the Multiplicative Model",
+    x = "Periods (in Months)" 
+  )
+```
+ 
+## Observations
+
+From the Additive model, it shows that there is significance in the random error terms around 1, 4, 7, 11, 12, 13, and 15, with potential significance at 3 and 8. Why is there such a significance in the random error term at 4? There could be many reasons, such as people giving up after a 4 months and then they leave. This could also make since that after a year of not being in the labor force, they may want to return.
+
+The multiplicative Model illustrates the pattern of waiting a year before joining. The only significant autocorrelation points are at 1, 2, 3, 7, 11, 12, 13, and 14. This would show that there is autocorrelation after a few periods, months, but then does not really show up for about half a year, then shows up significantly after a year of participation. This may highlight that there is something important that occurs a year after joining or leaving the labor force.
+
+# Conclusion
+
+From this work, I have come to see these major observations looking at the model and the features that goes into it:
+
+1. Seasonality is important. We can see that with both multiplicative and additive Holt-Winters models, certain times of the year will impact the predicted observation. We see that June is the highest, and July is the lowest. This may show when to join the work force.
+2. Less graduates are participating. After COVID-19, there has been a small recovery, but more college graduates are leaving the work force, and the forecast model is showing that there is lowering participation rates.
+3. Random error may not be random. There is significance shown within the correlogram at around a year for each additive and multiplicative models, so this would show there may be something significant each year. 
+
+The key take away for me is that there are less college graduates that are working. More of them are leaving, and that is something interesting to think about. Are people valuing a college degree as high as they used to? That would be something more to look into.
+
+
+

@@ -1,18 +1,27 @@
-# BYUI DS Portfolio Template
-## Building a Quarto Portfolo
+# Aaron Hyde Data Science Portfolio
 
-A template for a portfolio developed with Quarto and hosted on GitHub.
+This repository contains the R and Quarto source files for my data science portfolio.
 
-This is all configured so you only need to edit the source files in Quarto (.qmd). The website is generated and hosted automatically by GitHub.
+The website is published at:
 
-## Using this template
+<https://ahydeishere.github.io/Aaron-Hyde-s-Portfolio/>
 
-1. Click on green button "Use this Tempalte" -> "Create a new Repo"
+## Local preview
 
-1. Choose a name for your repository
+Install R, RStudio, and Quarto, then run:
 
-1. Important: check 'Include all branches' when creating the repository (because we will need the gh-pages branch to host the website).
+```bash
+quarto preview
+```
 
-1. Once your repo is created, remember to update the links to your GitHub repo in _quarto.yml, replacing every instance 'your_name'.
+## Adding a project
 
-1. The first time you publish to your repo use this command line string `quarto publish gh-pages` in the vs code terminal.
+Add the project `.qmd` file to the repository, link it from the navigation in `_quarto.yml`, and push it to the `main` branch. GitHub Actions will render and publish the website automatically.
+
+Project data should use repository-relative paths or public URLs. For example:
+
+```r
+readr::read_csv("data/my-data.csv")
+```
+
+Do not use paths beginning with `C:/Users/` because those paths only work on one computer.

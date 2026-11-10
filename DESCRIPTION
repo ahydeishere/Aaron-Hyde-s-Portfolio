@@ -1,0 +1,16 @@
+Package: aarondataportfolio
+Title: Aaron Hyde Data Portfolio
+Version: 0.0.1
+Description: Reproducible R and Quarto projects for Aaron Hyde's portfolio.
+Imports:
+    feasts,
+    fable,
+    ggtime,
+    lubridate,
+    pacman,
+    pander,
+    patchwork,
+    rio,
+    tidyverse,
+    tsibble,
+    zoo

@@ -1,1 +1,37 @@
-/* css styles */
+/* Portfolio styling */
+:root {
+  --portfolio-blue: #17324d;
+  --portfolio-teal: #2a7f82;
+}
+
+.navbar {
+  border-bottom: 3px solid var(--portfolio-teal);
+}
+
+.quarto-title-block .quarto-title-banner {
+  background: var(--portfolio-blue);
+}
+
+.hero {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #17324d, #2a7f82);
+  color: white;
+}
+
+.hero h1 {
+  color: white;
+}
+
+.hero a {
+  color: white;
+}
+
+.grid h3 {
+  color: var(--portfolio-blue);
+}
+
+a {
+  color: var(--portfolio-teal);
+}

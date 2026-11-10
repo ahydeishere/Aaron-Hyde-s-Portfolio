@@ -1,10 +1,54 @@
 ---
-title: "about me"
-subtitle: "my data science portfolio"
-# use quarto markdown to 
+title: "Aaron Hyde"
+subtitle: "Data science, economics, and business insight"
 ---
 
-# Title 1 Header
-## Title 2 Header
+::: {.hero}
+# Welcome to my portfolio
 
-[MarkDown Basics](https://quarto.org/docs/authoring/markdown-basics.html#links-images)
+I use **R**, **Quarto**, and statistical modeling to explore data and communicate useful conclusions. This site collects my reproducible projects, visualizations, and coursework.
+
+[View my projects](#featured-projects){.btn .btn-primary}
+:::
+
+## Featured projects {#featured-projects}
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4}
+### Time-series forecasting
+
+An autocorrelation and Holt–Winters analysis of labor force participation among people with a bachelor's degree or higher.
+
+[Read the project →](Autocorrelation and Exponential Smoothing Project.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### Data exploration
+
+Projects that use cleaning, visualization, and exploratory analysis to understand real-world datasets.
+
+[Explore the section →](exploration.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-4}
+### Business communication
+
+Data storytelling and business-focused projects that connect analysis to decisions.
+
+[Explore the section →](story_telling.qmd)
+:::
+
+:::
+
+## Tools and methods
+
+- R and RStudio
+- tidyverse and ggplot2
+- tsibble, fable, and time-series forecasting
+- Quarto and reproducible reporting
+- Data visualization and business analysis
+
+## About this site
+
+The source files for this portfolio are available on [GitHub](https://github.com/ahydeishere/Aaron-Hyde-s-Portfolio). Each project begins as an R or Quarto file and is rendered into the website automatically.
