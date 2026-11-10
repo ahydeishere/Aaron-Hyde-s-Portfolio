@@ -34,14 +34,14 @@ pacman::p_load(
 
 ## Importing Data
 
-The data that I am using is taken from Federal Reserve website from St. Louis. The link is here: <https://fred.stlouisfed.org/series/LNS11327662> 
+The data that I am using is taken from the Federal Reserve Bank of St. Louis through FRED. The link is here: <https://fred.stlouisfed.org/series/LNU01327662> 
 
 ```{r message=FALSE, warning=FALSE}
 #| code-fold: true
 #| code-summary: "Data on Labor Participation for People with a Bachelors Degree or Higher."
 
 degree_participation <- read_csv(
-  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=LNS11327662"
+  "https://fred.stlouisfed.org/graph/fredgraph.csv?id=LNU01327662"
 )
 
 ```
