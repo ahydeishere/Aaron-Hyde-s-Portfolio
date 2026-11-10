@@ -5,6 +5,7 @@ Description: Reproducible R and Quarto projects for Aaron Hyde's portfolio.
 Imports:
     feasts,
     fable,
+    forecast,
     ggtime,
     lubridate,
     pacman,
